@@ -11,22 +11,38 @@ namespace engine {
 	GameState::GameState(gameDataRef data)
 		: data(data),
 		  imageReader(data, "train-images.idx3-ubyte", "train-labels.idx1-ubyte", 60000),
-		  nn(28*28, 15, 10)
+		  testImageReader(data, "t10k-images.idx3-ubyte", "t10k-labels.idx1-ubyte", 10000),
+		  nn(28*28, 30, 10)
 	{
 		this->init();
 
+		//Train
 		for (int i = 0; i < 100000; i++) {
-			//Train
+			
 			nn.updateMiniBatch(imageReader);
 
-			//Try
+			if (i % 1000 == 0) {
+				std::cout << "MiniBatch iteration: " << i << std::endl;
+			}
+
+		}
+
+		//Test
+		int correctClassifications = 0;
+		for (int i = 0; i < 10000; i++) {
 			Matrix<float> inputPixels(28 * 28, 1);
 			for (int j = 0; j < 28 * 28; j++) {
-				//std::cout << float(unsigned char(imageReader.currentImage[j])) / 255 << std::endl;
-				inputPixels.set(j, float(unsigned char(imageReader.currentImage[j])) / 255);
+				inputPixels.set(j, float(unsigned char(testImageReader.currentImage[j])) / 255);
 			}
-			std::cout << "Predict: " << nn.predict(inputPixels) << "\t Correct: " << imageReader.label << std::endl;
+			if (nn.predict(inputPixels) == testImageReader.label) {
+				correctClassifications++;
+			}
+			testImageReader.loadNext();
 		}
+
+		std::cout << "Correct classifications: " << correctClassifications << std::endl;
+
+
 	}
 
 	void GameState::init() {

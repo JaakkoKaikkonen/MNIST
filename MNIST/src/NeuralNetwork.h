@@ -38,7 +38,7 @@ namespace engine {
 
 		int miniBatchSize = 100;
 
-		float learningRate = 0.01f;
+		float learningRate = 3.0f;
 
 	};
 

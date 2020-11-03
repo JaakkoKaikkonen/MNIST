@@ -32,6 +32,8 @@ namespace engine {
 
 		ImageReader imageReader;
 
+		ImageReader testImageReader;
+
 		//ImGui///////////////////////////////////////
 		
 

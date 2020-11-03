@@ -12,12 +12,12 @@
     <ClInclude Include="src\DEFINITIONS.hpp" />
     <ClInclude Include="src\Game.hpp" />
     <ClInclude Include="src\GameState.hpp" />
+    <ClInclude Include="src\ImGuiLog.h" />
     <ClInclude Include="src\ImageReader.h" />
-    <ClInclude Include="src\State.hpp" />
-    <ClInclude Include="src\Utility.hpp" />
     <ClInclude Include="src\Matrix.h" />
     <ClInclude Include="src\NeuralNetwork.h" />
-    <ClInclude Include="src\ImGuiLog.h" />
+    <ClInclude Include="src\State.hpp" />
+    <ClInclude Include="src\Utility.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Animation.cpp" />
@@ -41,8 +41,8 @@
       <Filter>ImGui</Filter>
     </ClCompile>
     <ClCompile Include="src\ImageReader.cpp" />
+    <ClCompile Include="src\NeuralNetwork.cpp" />
     <ClCompile Include="src\Utility.cpp" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\NeuralNetwork.cpp" />
   </ItemGroup>
 </Project>

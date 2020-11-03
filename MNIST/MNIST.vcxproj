@@ -101,8 +101,8 @@
     <ClInclude Include="src\DEFINITIONS.hpp" />
     <ClInclude Include="src\Game.hpp" />
     <ClInclude Include="src\GameState.hpp" />
-    <ClInclude Include="src\ImageReader.h" />
     <ClInclude Include="src\ImGuiLog.h" />
+    <ClInclude Include="src\ImageReader.h" />
     <ClInclude Include="src\Matrix.h" />
     <ClInclude Include="src\NeuralNetwork.h" />
     <ClInclude Include="src\State.hpp" />
