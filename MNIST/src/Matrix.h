@@ -16,6 +16,7 @@ public:
 		: rows(_rows), cols(_cols)
 	{
 		assert(_rows != 0 && _cols != 0);
+		assert(_rows > 0 && _cols > 0);
 		data = new T[_rows * _cols];
 	}
 

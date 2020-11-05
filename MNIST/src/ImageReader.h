@@ -5,18 +5,21 @@
 
 #include <SFML/Graphics.hpp>
 #include "Game.hpp"
+#include "Matrix.h"
 
 namespace engine {
 
 	class ImageReader
 	{
 	public:
-		ImageReader(gameDataRef data, const char* imageFilename, const char* labelFilename, int numOfImages);
+		ImageReader(gameDataRef data, const char* imageFilename, const char* labelFilename, const int numOfImages, const int imageWidth);
 		~ImageReader();
 
 		void loadNext();
 
 		void drawCurrent();
+
+		Matrix<float> currentImageToInputMatrix();
 
 	public:
 
@@ -45,16 +48,15 @@ namespace engine {
 		LabelFileHeader labelFileHeader;
 
 
-
 		std::ifstream imageStream;
 		std::ifstream labelStream;
 
 		int numOfImages;
 		int imageIndex = 1;
 
-		const int w = 28;
+		const int width;
 
-		//Scale must be odd number
+		//Scale should be odd number
 		int scale = 7;
 
 		sf::RectangleShape pixel;

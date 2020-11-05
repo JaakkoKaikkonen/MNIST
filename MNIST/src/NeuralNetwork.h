@@ -19,8 +19,6 @@ namespace engine {
 
 		void updateMiniBatch(ImageReader& imageReader);
 
-		void randomize();
-
 	public:
 		Matrix<float> weights1;
 		Matrix<float> weights2;
@@ -36,7 +34,7 @@ namespace engine {
 		int numOfhiddenNodes;
 		int numOfOutputs;
 
-		int miniBatchSize = 100;
+		int miniBatchSize = 10;
 
 		float learningRate = 3.0f;
 

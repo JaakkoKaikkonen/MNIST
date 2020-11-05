@@ -70,10 +70,7 @@ namespace engine {
 		for (int i = 0; i < miniBatchSize; i++) {
 			
 			//Get input Pixels from imageReader
-			Matrix<float> inputPixels(numOfInputs, 1);
-			for (int j = 0; j < numOfInputs; j++) {
-				inputPixels.set(j, float(unsigned char(imageReader.currentImage[j])) / 255);
-			}
+			Matrix<float> inputPixels = imageReader.currentImageToInputMatrix();
 
 			//Create correct ouput vector
 			Matrix<float> correctOutput(numOfOutputs, 1);
@@ -128,14 +125,6 @@ namespace engine {
 
 	}
 
-
-
-	void NeuralNetwork::randomize() {
-		weights1.randomize();
-		weights2.randomize();
-		bias_hidden.randomize();
-		bias_output.randomize();
-	}
 
 
 }

@@ -11,6 +11,7 @@
 
 #include "ImageReader.h"
 #include "NeuralNetwork.h"
+#include "Drawing.h"
 
 namespace engine {
 
@@ -28,19 +29,28 @@ namespace engine {
 	private:
 		gameDataRef data;
 
-		sf::Color bgColor = sf::Color::White;
+		sf::Color bgColor = sf::Color::Black;
+
+		Drawing drawing;
+
+		const int imageWidth = 28;
 
 		ImageReader imageReader;
 
 		ImageReader testImageReader;
 
 		//ImGui///////////////////////////////////////
-		
+		ImGuiLog ImGuiLog;
 
 
 		//////////////////////////////////////////////
 
+		const int numOfHiddenNodes = 30;
+
+		const int numOfMiniBatchesToTrainOn = 1000;
+
 		NeuralNetwork nn;
+
 	};
 
 }

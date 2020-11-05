@@ -12,8 +12,8 @@ namespace engine {
 		icon.loadFromFile(TOP_ICON_FILEPATH);
 
 		data->window.create(sf::VideoMode(width, height), title, sf::Style::Close | sf::Style::Titlebar);
-		//_data->window.setVerticalSyncEnabled(true);
-		//_data->window.setFramerateLimit(60);
+		//data->window.setVerticalSyncEnabled(true);
+		//data->window.setFramerateLimit(60);
 
 		data->window.setPosition(sf::Vector2i(500, 100));
 
@@ -68,8 +68,8 @@ namespace engine {
 
 			accumulator += frameTime;
 
-			while (accumulator >= dt)
-			{
+			while (accumulator >= dt) {
+
 				this->data->state->handleInput();
 				this->data->state->update(dt);
 

@@ -2,15 +2,16 @@
 
 namespace engine {
 
-	ImageReader::ImageReader(gameDataRef data, const char* imageFilename, const char* labelFilename, int numOfImages)
+	ImageReader::ImageReader(gameDataRef data, const char* imageFilename, const char* labelFilename, const int numOfImages, const int imageWidth)
 		: data(data),
-		  numOfImages(numOfImages)
+		  numOfImages(numOfImages),
+		  width(imageWidth)
 	{
 		pixel.setSize(sf::Vector2f(1, 1));
 
-		currentImage = new char[w*w];
+		currentImage = new char[width*width];
 
-		//Image stream
+		//Open Image stream
 		imageStream.open(imageFilename, std::ios::binary);
 
 		if (!imageStream) {
@@ -18,19 +19,12 @@ namespace engine {
 			return;
 		}
 
-		//??????????????????????????????????????????????????????
-		imageStream.read(reinterpret_cast<char*>(&imageFileHeader), sizeof(imageFileHeader));
-
-		//std::cout << "size(fileHeader): " << sizeof(imageFileHeader) << std::endl;
-		
-		//std::cout << imageFileHeader.magicNumber << std::endl;
-		//std::cout << imageFileHeader.numberOfImages << std::endl;
-		//std::cout << imageFileHeader.numberOfRows << std::endl;
-		//std::cout << imageFileHeader.numberOfColumns << std::endl;
-		//????????????????????????????????????????????????????
+		//Jump to the data
+		imageStream.seekg(sizeof(imageFileHeader));
 
 
-		//Label stream
+
+		//Open Label stream
 		labelStream.open(labelFilename, std::ios::binary);
 
 		if (!labelStream) {
@@ -38,19 +32,15 @@ namespace engine {
 			return;
 		}
 
-		//????????????????????????????????????????????????????????????????????????
-		labelStream.read(reinterpret_cast<char*>(&labelFileHeader), sizeof(labelFileHeader));
+		//Jump to the data
+		labelStream.seekg(sizeof(labelFileHeader));
 
-		//std::cout << labelFileHeader.magicNumber << std::endl;
-		//std::cout << labelFileHeader.numberOfItems << std::endl;
-		//?????????????????????????????????????????????????????????????????????????
 
 		//Read first image
-		imageStream.read(currentImage, w*w);
+		imageStream.read(currentImage, width*width);
 
 		//Read first label
 		label = labelStream.get();
-		//std::cout << label << std::endl;
 
 	}
 
@@ -69,27 +59,34 @@ namespace engine {
 			labelStream.seekg(sizeof(labelFileHeader));
 		}
 
-		imageStream.read(currentImage, w*w);
+		imageStream.read(currentImage, width*width);
 		label = labelStream.get();
-		//std::cout << label << std::endl;
 
 		imageIndex++;
 
 	}
 
 	void ImageReader::drawCurrent() {
-		for (int i = 0; i < w * w; i++) {
+		for (int i = 0; i < width * width; i++) {
 			char c = currentImage[i];
 			pixel.setFillColor(sf::Color(c, c, c));
 
 			for (int x = -int(scale / 2); x <= int(scale / 2); x++) {
 				for (int y = -int(scale / 2); y <= int(scale / 2); y++) {
-					pixel.setPosition(((i * scale) % (w * scale)) + x + int(scale / 2), (int(i / w) * scale) + y + int(scale / 2));
+					pixel.setPosition(((i * scale) % (width * scale)) + x + int(scale / 2), (int(i / width) * scale) + y + int(scale / 2));
 					data->window.draw(pixel);
 				}
 			}
 
 		}
+	}
+
+	Matrix<float> ImageReader::currentImageToInputMatrix() {
+		Matrix<float> inputPixels(width * width, 1);
+		for (int j = 0; j < width * width; j++) {
+			inputPixels.set(j, float(unsigned char(currentImage[j])) / 255);
+		}
+		return inputPixels;
 	}
 
 }
