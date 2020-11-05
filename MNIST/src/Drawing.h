@@ -27,6 +27,10 @@ namespace engine {
 
 		int penSize = 5;
 
+		bool leftMouseButtonWasPressedLastUpdate = false;
+
+		sf::Vector2f previousMousePos;
+
 
 	};
 

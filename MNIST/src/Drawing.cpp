@@ -13,10 +13,32 @@ namespace engine {
 
 	void Drawing::update() {
 
-		if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+		if (!sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+
+			leftMouseButtonWasPressedLastUpdate = false;
+
+		} else {
+
+			sf::Vector2f mousePos = sf::Vector2f(sf::Mouse::getPosition(data->window));
+
+			if (leftMouseButtonWasPressedLastUpdate) {
+
+				sf::Vector2f mouseMoveVector = mousePos - previousMousePos;
+				float mouseMoveVectorLength = sqrt((mouseMoveVector.x * mouseMoveVector.x) + (mouseMoveVector.y * mouseMoveVector.y));
+
+				for (int i = 0; i < int(mouseMoveVectorLength); i++) {
+					pixels.emplace_back(sf::RectangleShape(sf::Vector2f(penSize, penSize)));
+					pixels[pixels.size() - 1].setPosition(previousMousePos + ((i / mouseMoveVectorLength) * mouseMoveVector));
+				}
+
+			}
+
 			pixels.emplace_back(sf::RectangleShape(sf::Vector2f(penSize, penSize)));
-			pixels[pixels.size() - 1].setPosition(sf::Vector2f(sf::Mouse::getPosition(data->window) - sf::Vector2i(penSize / 2, penSize / 2)));
-		}
+			pixels[pixels.size() - 1].setPosition(mousePos);
+
+			previousMousePos = mousePos;
+			leftMouseButtonWasPressedLastUpdate = true;
+		} 
 
 	}
 
