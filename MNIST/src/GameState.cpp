@@ -68,6 +68,7 @@ namespace engine {
 				ImGuiLog.AddLog("\n");
 			}
 
+
 		}
 
 	}
@@ -82,9 +83,28 @@ namespace engine {
 
 		ImGui::Begin("UI"); // begin window
 
-		if (ImGui::Button("Clear")) {
-			drawing.clear();
+
+		ImGui::Combo("Mode", &modeIndex, modes, IM_ARRAYSIZE(modes));
+
+		if (modes[modeIndex] == "Draw yourself") {
+			if (ImGui::Button("Clear")) {
+				drawing.clear();
+			}
+			if (ImGui::Button("Predict")) {
+				this->predictDrawing();
+			}
 		}
+
+		if (modes[modeIndex] == "Test Data") {
+			if (ImGui::Button("Next")) {
+
+				testImageReader.loadNext();
+
+				ImGuiLog.AddLog(std::to_string(nn.predict(testImageReader.currentImageToInputMatrix())).c_str());
+				ImGuiLog.AddLog("\n");
+			}
+		}
+
 
         ImGui::End(); // end window
 		//////////////////////////////////////////////////////////////////////////////////////////////////
@@ -98,7 +118,10 @@ namespace engine {
 
 		drawing.draw();
 
-		testImageReader.drawCurrent();
+
+		if (modes[modeIndex] == "Test Data") {
+			testImageReader.drawCurrent(imageScale);
+		}
 
 
 		//ImGui///////////////////////////////////////////////////////////////////////////////////////////
@@ -109,6 +132,49 @@ namespace engine {
 
 		data->window.display();
 	
+	}
+
+
+	void GameState::predictDrawing() {
+
+		texture.create(data->window.getSize().x, data->window.getSize().y);
+		texture.update(data->window);
+
+		sf::Image image = texture.copyToImage();
+
+		sf::Image testImage;
+		testImage.create(28, 28);
+
+		Matrix<float> inputMatrix(imageWidth * imageWidth, 1);
+
+		for (int y = 0; y < imageWidth; y++) {
+			for (int x = 0; x < imageWidth; x++) {
+
+				float value = 0;
+
+				for (int i = -int(imageScale / 2); i <= int(imageScale / 2); i++) {
+					for (int j = -int(imageScale / 2); j <= int(imageScale / 2); j++) {
+						value += int(image.getPixel(int(imageScale / 2) + (x * imageScale) + i, int(imageScale / 2) + (y * imageScale) + j).r);
+					}
+				}
+
+				inputMatrix.set(y * imageWidth + x, (value / ((imageScale * imageScale) * 255)));
+
+				//std::cout << "-> " << (value / ((scale * scale) * 255)) << std::endl;
+
+				/////////////////////////////////////////
+				int c = value / ((imageScale * imageScale));
+
+
+				sf::Color color(c, c, c);
+				testImage.setPixel(x, y, color);
+				testImage.saveToFile("testImage.png");
+				////////////////////////////////////////
+			}
+		}
+
+		ImGuiLog.AddLog(std::to_string(nn.predict(inputMatrix)).c_str());
+		ImGuiLog.AddLog("\n");
 	}
 
 

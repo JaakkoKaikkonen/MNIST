@@ -34,9 +34,9 @@ namespace engine {
 		int numOfhiddenNodes;
 		int numOfOutputs;
 
-		int miniBatchSize = 10;
+		int miniBatchSize = 100;
 
-		float learningRate = 3.0f;
+		float learningRate = 2.0f;
 
 	};
 

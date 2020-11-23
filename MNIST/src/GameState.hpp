@@ -26,14 +26,22 @@ namespace engine {
 		void update(float dt);
 		void draw();
 
+		void predictDrawing();
+
 	private:
 		gameDataRef data;
 
 		sf::Color bgColor = sf::Color::Black;
 
+		const char* modes[2] = {"Draw yourself", "Test Data"};
+		int modeIndex = 0;
+
 		Drawing drawing;
 
 		const int imageWidth = 28;
+
+		//Scale should be odd number
+		const int imageScale = 7;
 
 		ImageReader imageReader;
 
@@ -41,15 +49,17 @@ namespace engine {
 
 		//ImGui///////////////////////////////////////
 		ImGuiLog ImGuiLog;
-
-
 		//////////////////////////////////////////////
 
-		const int numOfHiddenNodes = 30;
+		const int numOfHiddenNodes = 40;
 
-		const int numOfMiniBatchesToTrainOn = 1000;
+		const int numOfMiniBatchesToTrainOn = 20000;
 
 		NeuralNetwork nn;
+
+
+
+		sf::Texture texture;
 
 	};
 

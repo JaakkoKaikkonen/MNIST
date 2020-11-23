@@ -66,9 +66,10 @@ namespace engine {
 
 	}
 
-	void ImageReader::drawCurrent() {
+	void ImageReader::drawCurrent(const int& scale) {
 		for (int i = 0; i < width * width; i++) {
 			char c = currentImage[i];
+
 			pixel.setFillColor(sf::Color(c, c, c));
 
 			for (int x = -int(scale / 2); x <= int(scale / 2); x++) {

@@ -25,12 +25,14 @@ namespace engine {
 
 		std::vector<sf::RectangleShape> pixels;
 
-		int penSize = 5;
+		int penSize = 13;
 
 		bool leftMouseButtonWasPressedLastUpdate = false;
 
 		sf::Vector2f previousMousePos;
 
+		int drawingAreaWidth = 196;
+		int drawingAreaHeight = 196;
 
 	};
 

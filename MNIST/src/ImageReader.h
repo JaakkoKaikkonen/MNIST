@@ -17,7 +17,7 @@ namespace engine {
 
 		void loadNext();
 
-		void drawCurrent();
+		void drawCurrent(const int& scale);
 
 		Matrix<float> currentImageToInputMatrix();
 
@@ -55,9 +55,6 @@ namespace engine {
 		int imageIndex = 1;
 
 		const int width;
-
-		//Scale should be odd number
-		int scale = 7;
 
 		sf::RectangleShape pixel;
 
