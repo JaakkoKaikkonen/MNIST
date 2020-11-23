@@ -1,6 +1,5 @@
 #include "Game.hpp"
 #include "GameState.hpp"
-#include "DEFINITIONS.hpp"
 
 #include <iostream>
 
@@ -9,7 +8,7 @@ namespace engine {
 	Game::Game(int width, int height, std::string title) {
 
 		sf::Image icon;
-		icon.loadFromFile(TOP_ICON_FILEPATH);
+		icon.loadFromFile("Resources/Images/topIcon.png");
 
 		data->window.create(sf::VideoMode(width, height), title, sf::Style::Close | sf::Style::Titlebar);
 		//data->window.setVerticalSyncEnabled(true);
@@ -20,16 +19,6 @@ namespace engine {
 		data->window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 
 
-		//Load Resources ----------------------------------------------------------------------
-
-		//Textures
-
-		//Sounds
-
-		//Fonts
-
-
-		//-------------------------------------------------------------------------------------
 
 		srand((unsigned int)time(NULL));
 		

@@ -1,10 +1,9 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
-#include "DEFINITIONS.hpp"
 #include "State.hpp"
 #include "Game.hpp"
-#include "Animation.hpp"
+
 
 #include "imgui.h"
 #include "imgui-SFML.h"
@@ -53,7 +52,7 @@ namespace engine {
 
 		const int numOfHiddenNodes = 40;
 
-		const int numOfMiniBatchesToTrainOn = 20000;
+		const int numOfMiniBatchesToTrainOn = 2000;
 
 		NeuralNetwork nn;
 

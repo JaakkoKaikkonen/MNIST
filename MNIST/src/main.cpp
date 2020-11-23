@@ -1,11 +1,10 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "Game.hpp"
-#include "DEFINITIONS.hpp"
 
 int main() {
 
-	engine::Game(SCREEN_WIDTH, SCREEN_HEIGHT, WINDOW_TITLE);
+	engine::Game(400, 400, "MNIST");
 
 	return 0;
 }
