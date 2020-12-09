@@ -116,11 +116,11 @@ namespace engine {
 		}
 
 
-		weights1 -= Matrix<float>::multiply((learningRate / miniBatchSize), weightGradient1);
-		weights2 -= Matrix<float>::multiply((learningRate / miniBatchSize), weightGradient2);
+		weights1 -= (learningRate / miniBatchSize) * weightGradient1;
+		weights2 -= (learningRate / miniBatchSize) * weightGradient2;
 
-		bias_hidden -= Matrix<float>::multiply((learningRate / miniBatchSize), biasGradient1);
-		bias_output -= Matrix<float>::multiply((learningRate / miniBatchSize), biasGradient2);
+		bias_hidden -= (learningRate / miniBatchSize) * biasGradient1;
+		bias_output -= (learningRate / miniBatchSize) * biasGradient2;
 
 
 	}

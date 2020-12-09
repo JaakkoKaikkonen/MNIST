@@ -91,10 +91,9 @@ public:
 		return result;
 	}
 
-	/*Matrix operator*(const float scalar, const Matrix& M) {
+	friend Matrix operator*(const float& scalar, const Matrix& M) {
 		return Matrix::multiply(scalar, M);
-	}*/
-
+	}
 
 	static Matrix hadamardProduct(const Matrix& matrix1, const Matrix& matrix2) {
 		assert(matrix1.rows == matrix2.rows && matrix1.cols == matrix2.cols);
