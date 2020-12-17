@@ -6,36 +6,34 @@
 #include <SFML/Graphics.hpp>
 #include "Game.hpp"
 
-namespace engine {
 
-	class Drawing {
+class Drawing {
 
-	public:
-		Drawing(gameDataRef data);
-		~Drawing();
+public:
+	Drawing(gameDataRef data);
+	~Drawing();
 
-		void update();
+	void update();
 
-		void draw();
+	void draw();
 
-		void clear();
+	void clear();
 
-	private:
-		gameDataRef data;
+private:
+	gameDataRef data;
 
-		std::vector<sf::RectangleShape> pixels;
+	std::vector<sf::RectangleShape> pixels;
 
-		int penSize = 13;
+	int penSize = 13;
 
-		bool leftMouseButtonWasPressedLastUpdate = false;
+	bool leftMouseButtonWasPressedLastUpdate = false;
 
-		sf::Vector2f previousMousePos;
+	sf::Vector2f previousMousePos;
 
-		int drawingAreaWidth = 196;
-		int drawingAreaHeight = 196;
+	int drawingAreaWidth = 196;
+	int drawingAreaHeight = 196;
 
-	};
-
+};
 
 
-}
+

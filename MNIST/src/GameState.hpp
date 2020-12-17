@@ -12,55 +12,53 @@
 #include "NeuralNetwork.h"
 #include "Drawing.h"
 
-namespace engine {
 
-	class GameState : public State
-	{
-	public:
-		GameState(gameDataRef data);
+class GameState : public State
+{
+public:
+	GameState(gameDataRef data);
 
-		void init();
+	void init();
 
-		void handleInput();
-		void update(float dt);
-		void draw();
+	void handleInput();
+	void update(float dt);
+	void draw();
 
-		void predictDrawing();
+	void predictDrawing();
 
-	private:
-		gameDataRef data;
+private:
+	gameDataRef data;
 
-		sf::Color bgColor = sf::Color::Black;
+	sf::Color bgColor = sf::Color::Black;
 
-		const char* modes[2] = {"Draw yourself", "Test Data"};
-		int modeIndex = 0;
+	int trainingDataSize = 60000;
+	int testDataSize = 10000;
 
-		Drawing drawing;
+	const char* modes[2] = {"Draw yourself", "Test Data"};
+	int modeIndex = 0;
 
-		const int imageWidth = 28;
+	Drawing drawing;
 
-		//Scale should be odd number
-		const int imageScale = 7;
+	const int imageWidth = 28;
 
-		ImageReader imageReader;
+	//Scale should be odd number
+	const int imageScale = 7;
 
-		ImageReader testImageReader;
+	ImageReader imageReader;
 
-		//ImGui///////////////////////////////////////
-		ImGuiLog ImGuiLog;
-		//////////////////////////////////////////////
+	ImageReader testImageReader;
 
-		const int numOfHiddenNodes = 40;
+	//ImGui///////////////////////////////////////
+	ImGuiLog ImGuiLog;
+	//////////////////////////////////////////////
 
-		const int numOfMiniBatchesToTrainOn = 2000;
+	const int numOfHiddenNodes = 40;
 
-		NeuralNetwork nn;
+	const int numOfMiniBatchesToTrainOn = 1000;
 
+	NeuralNetwork nn;	
+		
 
+};
 
-		sf::Texture texture;
-
-	};
-
-}
 

@@ -7,58 +7,55 @@
 #include "Game.hpp"
 #include "Matrix.h"
 
-namespace engine {
 
-	class ImageReader
-	{
-	public:
-		ImageReader(gameDataRef data, const char* imageFilename, const char* labelFilename, const int numOfImages, const int imageWidth);
-		~ImageReader();
+class ImageReader
+{
+public:
+	ImageReader(gameDataRef data, const char* imageFilename, const char* labelFilename, const int numOfImages, const int imageWidth);
+	~ImageReader();
 
-		void loadNext();
+	void loadNext();
 
-		void drawCurrent(const int& scale);
+	void drawCurrent(const int& scale);
 
-		Matrix<float> currentImageToInputMatrix();
+	Matrix<float> currentImageToInputMatrix();
 
-	public:
+public:
 
-		char* currentImage;
+	char* currentImage;
 
-		int label;
+	int label;
 
-	private:
+private:
 
-		gameDataRef data;
+	gameDataRef data;
 
-		struct ImageFileHeader {
-			int magicNumber;
-			int numberOfImages;
-			int numberOfRows;
-			int numberOfColumns;
-		};
-
-		ImageFileHeader imageFileHeader;
-
-		struct LabelFileHeader {
-			int magicNumber;
-			int numberOfItems;
-		};
-
-		LabelFileHeader labelFileHeader;
-
-
-		std::ifstream imageStream;
-		std::ifstream labelStream;
-
-		int numOfImages;
-		int imageIndex = 1;
-
-		const int width;
-
-		sf::RectangleShape pixel;
-
+	struct ImageFileHeader {
+		int magicNumber;
+		int numberOfImages;
+		int numberOfRows;
+		int numberOfColumns;
 	};
 
-}
+	ImageFileHeader imageFileHeader;
+
+	struct LabelFileHeader {
+		int magicNumber;
+		int numberOfItems;
+	};
+
+	LabelFileHeader labelFileHeader;
+
+
+	std::ifstream imageStream;
+	std::ifstream labelStream;
+
+	int numOfImages;
+	int imageIndex = 1;
+
+	const int width;
+
+	sf::RectangleShape pixel;
+
+};
 

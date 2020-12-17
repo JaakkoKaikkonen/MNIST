@@ -6,33 +6,32 @@
 #include <SFML/Audio.hpp>
 #include "State.hpp"
 
-namespace engine {
 
-	struct GameData {
-		sf::RenderWindow window;
+struct GameData {
+	sf::RenderWindow window;
 
-		State* state = nullptr;
-		State* newState = nullptr;
+	State* state = nullptr;
+	State* newState = nullptr;
 
-		//sf::Music music;
-	};
+	//sf::Music music;
+};
 
-	typedef std::shared_ptr<GameData> gameDataRef;
+typedef std::shared_ptr<GameData> gameDataRef;
 
-	class Game {
-	public:
-		Game(int width, int height, std::string title);
+class Game {
+public:
+	Game(int width, int height, std::string title);
 
-	private:
-		void run();
+private:
+	void run();
 
-	private:
-		sf::Clock clock;
+private:
+	sf::Clock clock;
 
-		const float dt = 1.0f / 60.0f;
+	const float dt = 1.0f / 60.0f;
 
-		gameDataRef data = std::make_shared<GameData>();
+	gameDataRef data = std::make_shared<GameData>();
 
-	};
+};
 
-}
+

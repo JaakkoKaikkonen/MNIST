@@ -4,7 +4,7 @@
 
 int main() {
 
-	engine::Game(400, 400, "MNIST");
+	Game(400, 400, "MNIST");
 
 	return 0;
 }
