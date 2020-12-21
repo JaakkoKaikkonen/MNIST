@@ -3,8 +3,8 @@
 
 ImageReader::ImageReader(gameDataRef data, const char* imageFilename, const char* labelFilename, const int numOfImages, const int imageWidth)
 	: data(data),
-		numOfImages(numOfImages),
-		width(imageWidth)
+	  numOfImages(numOfImages),
+	  width(imageWidth)
 {
 	pixel.setSize(sf::Vector2f(1, 1));
 

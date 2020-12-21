@@ -5,16 +5,16 @@
 
 NeuralNetwork::NeuralNetwork(int _numOfInputs, int _numOfhiddenNodes, int _numOfOutputs, int _numOfHiddenLayers)
 	: inputs(_numOfInputs, 1),
-	hiddenNodes(_numOfhiddenNodes, 1),
-	outputs(_numOfOutputs, 1),
-	weights1(_numOfhiddenNodes, _numOfInputs),
-	weights2(_numOfOutputs, _numOfhiddenNodes),
-	bias_hidden(_numOfhiddenNodes, 1),
-	bias_output(_numOfOutputs, 1),
-	numOfInputs(_numOfInputs),
-	numOfhiddenNodes(_numOfhiddenNodes),
-	numOfOutputs(_numOfOutputs),
-	numOfHiddenLayers(_numOfHiddenLayers)
+	  hiddenNodes(_numOfhiddenNodes, 1),
+	  outputs(_numOfOutputs, 1),
+	  weights1(_numOfhiddenNodes, _numOfInputs),
+	  weights2(_numOfOutputs, _numOfhiddenNodes),
+	  bias_hidden(_numOfhiddenNodes, 1),
+	  bias_output(_numOfOutputs, 1),
+	  numOfInputs(_numOfInputs),
+	  numOfhiddenNodes(_numOfhiddenNodes),
+	  numOfOutputs(_numOfOutputs),
+	  numOfHiddenLayers(_numOfHiddenLayers)
 {
 	weights1.randomize();
 	weights2.randomize();

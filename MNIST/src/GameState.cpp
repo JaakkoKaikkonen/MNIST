@@ -6,10 +6,10 @@
 
 GameState::GameState(gameDataRef data)
 	: data(data),
-		drawing(data),
-		imageReader(data, "train-images.idx3-ubyte", "train-labels.idx1-ubyte", trainingDataSize, imageWidth),
-		testImageReader(data, "t10k-images.idx3-ubyte", "t10k-labels.idx1-ubyte", testDataSize, imageWidth),
-		nn(imageWidth * imageWidth, numOfHiddenNodes, 10)
+	  drawing(data),
+	  imageReader(data, "train-images.idx3-ubyte", "train-labels.idx1-ubyte", trainingDataSize, imageWidth),
+	  testImageReader(data, "t10k-images.idx3-ubyte", "t10k-labels.idx1-ubyte", testDataSize, imageWidth),
+	  nn(imageWidth * imageWidth, numOfHiddenNodes, 10)
 {
 	this->init();
 }
