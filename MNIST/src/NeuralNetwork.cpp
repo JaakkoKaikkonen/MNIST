@@ -34,6 +34,7 @@ float NeuralNetwork::sigmoidPrime(float num) {
 
 int NeuralNetwork::predict(const Matrix<float>& inputs) {
 
+	//Feed forward
 	hiddenNodes = weights1 * inputs;
 	hiddenNodes += bias_hidden;
 	hiddenNodes.map(NeuralNetwork::sigmoid);
@@ -95,6 +96,7 @@ void NeuralNetwork::updateMiniBatch(ImageReader& imageReader) {
 		Matrix<float> a2(numOfOutputs, 1);
 		a2 = outputs;
 
+		//Backpropagation
 		//Calculate errors
 		Matrix<float> outputError(numOfOutputs, 1);
 		z2.map(NeuralNetwork::sigmoidPrime);

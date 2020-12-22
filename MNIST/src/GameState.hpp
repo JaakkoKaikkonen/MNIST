@@ -52,9 +52,9 @@ private:
 	ImGuiLog ImGuiLog;
 	//////////////////////////////////////////////
 
-	const int numOfHiddenNodes = 40;
+	const int numOfHiddenNodes = 30;
 
-	const int numOfMiniBatchesToTrainOn = 1000;
+	const int numOfMiniBatchesToTrainOn = 10000;
 
 	NeuralNetwork nn;	
 		
